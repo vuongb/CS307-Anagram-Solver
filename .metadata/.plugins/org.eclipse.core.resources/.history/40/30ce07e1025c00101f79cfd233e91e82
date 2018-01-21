@@ -1,0 +1,173 @@
+import java.util.*;
+
+
+
+public class AnagramSolver {
+	
+	class AnagramComparator implements Comparator<List<String>> {
+		
+		// Constructor for Anagram Comparator
+		public AnagramComparator(){
+			super();
+		}
+		
+		// Methods
+		
+		// Method Compares 2 String lists to determine the order between the 2 lists. 
+	    public int compare(List<String> a1, List<String> a2) 
+	    {
+	    	if(a1.size() < a2.size())
+	    		return -1;
+	    	else if(a1.size() > a2.size())
+	    		return 1;
+	    	else
+	    	{
+	    		int value = 0;
+	    		for(int i = 0; i < a1.size(); i++)
+	    		{
+	    			String str1 = a1.get(i);
+		    		String str2 = a2.get(i);
+	    			value = str1.compareTo(str2);
+	    			if(value != 0)
+	    				break;
+	    		}
+	    		return value;
+	    	}
+	    }
+	} // end of AnagramComparator
+	
+	public static final int ALPHABET = 26;
+
+	
+	// Fields	
+	private HashMap<String,LetterInventory> hm;
+	
+	
+	
+	// Constructor	
+	public AnagramSolver(List<String> words)
+	{
+		hm = new HashMap<String,LetterInventory>();
+		Iterator<String> it = words.iterator();
+		String str = "";
+		while(it.hasNext())
+		{
+			str = it.next();
+			hm.put(str, new LetterInventory(str));
+		}
+	}
+	
+	
+	// Methods
+	
+	
+	
+	// Method that gets the anagrams for a target string with an input 
+	// specified maximum number of words in the anagram
+	// Kick-Start Method
+	// Pre: String != null && has at least 1 letter && max >= 0
+	// Post: None
+	public List<List<String>> getAnagrams(String target, int max)
+	{
+		assert target != null && max >= 0: "Precondition failed. Input " +
+				"string != null && input number >= 0.";
+		
+		// Create LetterInventory for target String
+		LetterInventory targetLetInv = new LetterInventory(target);
+		
+		// Reduce Dictionary size to only possible dictionary entries
+		HashMap<String,LetterInventory> hmRed = dictionaryReduction(targetLetInv);
+		
+		// Prepare variables to be passed to Recursionary helper method
+		ArrayList<String> out = new ArrayList<String>();
+		List<List<String>> output = new ArrayList<List<String>>();
+		
+		// if value entered is 0, there is no limit to the combination of words
+		int value;
+		if(max == 0)
+			value = Integer.MAX_VALUE;
+		else
+			value = max;
+		
+		// Recursionary Method
+		List<List<String>> output2 = getAnagramsHelper(targetLetInv,value,hmRed, out, output);
+		AnagramComparator arrComp = new AnagramComparator();
+		
+		// Sort and return sorted output List
+		Collections.sort(output2,arrComp);
+		return output2;
+	}
+	
+
+	
+	// DictionaryReduction Method reduces the size of the dictionary to only words that are possible to be made from the target string
+	// Pre: None
+	// Post: None
+	private HashMap<String,LetterInventory> dictionaryReduction(LetterInventory letInv)
+	{
+		HashMap<String,LetterInventory> hmRed = new HashMap<String,LetterInventory>();
+		Iterator<String> it = hm.keySet().iterator();
+		while(it.hasNext())
+		{
+			String str = it.next();
+			LetterInventory temp = hm.get(str);
+			if(letInv.subtract(temp) != null)
+				hmRed.put(str, temp);
+		}
+		return hmRed;		
+	}
+	
+	
+	// Method that gets the anagrams for a target string with an input 
+	// specified maximum number of words in the anagram
+	// Recursion (work-horse) method
+	// Pre: String != null && has at least 1 letter && max >= 0
+	// Post: None
+	private List<List<String>> getAnagramsHelper(LetterInventory targetLetInv,
+			int max, HashMap<String,LetterInventory> dictRed, ArrayList<String> out, List<List<String>> output)
+	{	
+				
+		// Base Case
+		// LetterInventory is empty, != null, and combination of words is less than max #
+		if(targetLetInv != null && targetLetInv.isEmpty() && out.size()<=max)
+		{
+			
+			// Create copy of smaller list
+			ArrayList<String> outCopy = new ArrayList<String>();
+			for(int i = 0; i < out.size(); i++)
+				outCopy.add(out.get(i));		
+			
+			// Check for duplicates
+			Collections.sort(outCopy);
+			if(!output.contains(outCopy))
+			{
+				output.add(outCopy);
+				return output;
+			}
+		}
+				
+		
+		// Recursive Step
+		else
+		{
+			
+			// Iterate over reduced dictionary
+			Iterator<String> it = dictRed.keySet().iterator();
+			while(it.hasNext())
+			{
+				String str = it.next();
+				LetterInventory temp = dictRed.get(str);
+				LetterInventory diff = targetLetInv.subtract(temp);
+				if(diff != null)
+				{
+					out.add(str);
+					output = getAnagramsHelper(diff, max, dictRed, out, output);
+					out.remove(str);
+					
+				}
+			}
+		}
+		return output;
+		
+	}
+}

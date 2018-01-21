@@ -1,0 +1,407 @@
+
+public class LetterInventory {
+
+	public static final int ALPHABET = 26;
+	public static final int A = 0;
+	public static final int B = 1;
+	public static final int C = 2;
+	public static final int D = 3;
+	public static final int E = 4;
+	public static final int F = 5;
+	public static final int G = 6;
+	public static final int H = 7;
+	public static final int I = 8;
+	public static final int J = 9;
+	public static final int K = 10;
+	public static final int L = 11;
+	public static final int M = 12;
+	public static final int N = 13;
+	public static final int O = 14;
+	public static final int P = 15;
+	public static final int Q = 16;
+	public static final int R = 17;
+	public static final int S = 18;
+	public static final int T = 19;
+	public static final int U = 20;
+	public static final int V = 21;
+	public static final int W = 22;
+	public static final int X = 23;
+	public static final int Y = 24;
+	public static final int Z = 25;
+	
+	
+	// Fields
+	private int[] inventory = new int[ALPHABET];
+	private int letters;
+	
+	
+	// Constructor
+	// Pre: String Parameter isn't null
+	// Post: LetterInventory with inventory quantities corresponding to the
+	// number of characters in the input string
+	public LetterInventory(String s)
+	{
+		assert s!=null: "Constructor has failed preconditions. String passed is null.";
+		char ch;
+		s = s.toLowerCase();
+		letters = 0;
+		for(int i = 0; i < s.length(); i++)
+		{
+			ch = s.charAt(i);
+			if(Character.isLetter(ch))
+			{
+				letters++;
+				switch(ch)
+				{
+					case 'a': inventory[A]++; break;
+					case 'b': inventory[B]++; break;
+					case 'c': inventory[C]++; break;
+					case 'd': inventory[D]++; break;
+					case 'e': inventory[E]++; break;
+					case 'f': inventory[F]++; break;
+					case 'g': inventory[G]++; break;
+					case 'h': inventory[H]++; break;
+					case 'i': inventory[I]++; break;
+					case 'j': inventory[J]++; break;
+					case 'k': inventory[K]++; break;
+					case 'l': inventory[L]++; break;
+					case 'm': inventory[M]++; break;
+					case 'n': inventory[N]++; break;
+					case 'o': inventory[O]++; break;
+					case 'p': inventory[P]++; break;
+					case 'q': inventory[Q]++; break;
+					case 'r': inventory[R]++; break;
+					case 's': inventory[S]++; break;
+					case 't': inventory[T]++; break;
+					case 'u': inventory[U]++; break;
+					case 'v': inventory[V]++; break;
+					case 'w': inventory[W]++; break;
+					case 'x': inventory[X]++; break;
+					case 'y': inventory[Y]++; break;
+					case 'z': inventory[Z]++; break;
+				}
+			}
+		}
+	}
+	
+	// Pre: None
+	// Post: Creates a LetterInventory with all values in the array
+	// initialized to 0
+	public LetterInventory()
+	{
+		this("");
+	}
+	
+	
+	
+	// Methods
+	
+	
+	// Obtains the amount of chars in the inventory for the input char
+	// Pre: Character is from English language
+	// Post: None
+	public int get(char ch)
+	{
+		assert Character.isLetter(ch): "Method has failed precondition. Please enter a letter in the english language.";
+		ch=Character.toLowerCase(ch);
+		int output = 0;
+		switch(ch)
+		{
+			case 'a': output=inventory[A]; break;
+			case 'b': output=inventory[B]; break;
+			case 'c': output=inventory[C]; break;
+			case 'd': output=inventory[D]; break;
+			case 'e': output=inventory[E]; break;
+			case 'f': output=inventory[F]; break;
+			case 'g': output=inventory[G]; break;
+			case 'h': output=inventory[H]; break;
+			case 'i': output=inventory[I]; break;
+			case 'j': output=inventory[J]; break;
+			case 'k': output=inventory[K]; break;
+			case 'l': output=inventory[L]; break;
+			case 'm': output=inventory[M]; break;
+			case 'n': output=inventory[N]; break;
+			case 'o': output=inventory[O]; break;
+			case 'p': output=inventory[P]; break;
+			case 'q': output=inventory[Q]; break;
+			case 'r': output=inventory[R]; break;
+			case 's': output=inventory[S]; break;
+			case 't': output=inventory[T]; break;
+			case 'u': output=inventory[U]; break;
+			case 'v': output=inventory[V]; break;
+			case 'w': output=inventory[W]; break;
+			case 'x': output=inventory[X]; break;
+			case 'y': output=inventory[Y]; break;
+			case 'z': output=inventory[Z]; break;
+		}
+		return output;
+	}
+	
+	// Method sets the inventory of the input char to the input number
+	// Pre: character is from english language && n >= 0
+	// Post: None
+	public void set(char ch, int n)
+	{
+		assert Character.isLetter(ch) && n>=0: "Precondition failed. Character must be from english language and n >= 0.";
+		ch = Character.toLowerCase(ch);
+		int index = 0;
+		switch(ch)
+		{
+			case 'a': index=A; break;
+			case 'b': index=B; break;
+			case 'c': index=C; break;
+			case 'd': index=D; break;
+			case 'e': index=E; break;
+			case 'f': index=F; break;
+			case 'g': index=G; break;
+			case 'h': index=H; break;
+			case 'i': index=I; break;
+			case 'j': index=J; break;
+			case 'k': index=K; break;
+			case 'l': index=L; break;
+			case 'm': index=M; break;
+			case 'n': index=N; break;
+			case 'o': index=O; break;
+			case 'p': index=P; break;
+			case 'q': index=Q; break;
+			case 'r': index=R; break;
+			case 's': index=S; break;
+			case 't': index=T; break;
+			case 'u': index=U; break;
+			case 'v': index=V; break;
+			case 'w': index=W; break;
+			case 'x': index=X; break;
+			case 'y': index=Y; break;
+			case 'z': index=Z; break;
+		}
+		letters = letters - inventory[index] + n;
+		inventory[index] = n;
+	}
+	
+	// Method returns the total # of inventory letters
+	// Pre: None
+	// Post: None
+	public int size()
+	{
+		return letters;
+	}
+	
+	
+	// Method returns if the inventory list is empty
+	// Pre: None
+	// Post: None
+	public boolean isEmpty()
+	{
+		return letters == 0;
+	}
+	
+	
+	// Method returns a string representation of all the characters in the inventory
+	// Pre: None
+	// Post: None
+	public String toString()
+	{
+		String output = "";
+		String str = "";
+		for(int i = 0; i<inventory.length; i++)
+		{
+			switch(i)
+			{
+				case 0: str = "a"; break;
+				case 1: str = "b"; break;
+				case 2: str = "c"; break;
+				case 3: str = "d"; break;		
+				case 4: str = "e"; break;
+				case 5: str = "f"; break;	
+				case 6: str = "g"; break;
+				case 7: str = "h"; break;		
+				case 8: str = "i"; break;
+				case 9: str = "j"; break;		
+				case 10: str = "k"; break;
+				case 11: str = "l"; break;		
+				case 12: str = "m"; break;
+				case 13: str = "n"; break;			
+				case 14: str = "o"; break;
+				case 15: str = "p"; break;			
+				case 16: str = "q"; break;
+				case 17: str = "r"; break;			
+				case 18: str = "s"; break;
+				case 19: str = "t"; break;			
+				case 20: str = "u"; break;		
+				case 21: str = "v"; break;
+				case 22: str = "w"; break;				
+				case 23: str = "x"; break;
+				case 24: str = "y"; break;				
+				case 25: str = "z"; break;
+			}
+			for(int j = 0; j <inventory[i]; j++)
+				output += str;
+		}
+		return output;
+	}
+	
+	// Method retrieves the inventory quantity at a certain index
+	// Pre: 0 <= index < ALPHABET
+	// Post: None
+	public int retrieve(int index)
+	{
+		assert index >= 0 && index < ALPHABET: "Precondition failed. Input index must be >= 0 and < |Alphabet|";
+		return inventory[index];
+	}
+	
+	
+	// Method that changes the quantity of letters in the inventory
+	// Pre: newValue >= 0
+	// Post: Letters is equal to the input value
+	private void setLetters(int newValue)
+	{
+		assert newValue >= 0: "Precondition failed. Input newValue must be >= 0";
+		this.letters = newValue;
+	}
+	
+	// Method adds together 2 LetterInventories
+	// Pre: Parameter LetterInventory != null
+	// Post: None
+	public LetterInventory add(LetterInventory LetInv)
+	{
+		assert LetInv != null: "Precondition failed. Parameter was null.";
+		LetterInventory output = new LetterInventory();
+		char ch = 'a';
+		for(int i = 0; i < ALPHABET; i++)
+		{
+			switch(i)
+			{
+				case 0: ch = 'a'; break;
+				case 1: ch = 'b'; break;
+				case 2: ch = 'c'; break;
+				case 3: ch = 'd'; break;		
+				case 4: ch = 'e'; break;
+				case 5: ch = 'f'; break;	
+				case 6: ch = 'g'; break;
+				case 7: ch = 'h'; break;		
+				case 8: ch = 'i'; break;
+				case 9: ch = 'j'; break;		
+				case 10: ch = 'k'; break;
+				case 11: ch = 'l'; break;		
+				case 12: ch = 'm'; break;
+				case 13: ch = 'n'; break;			
+				case 14: ch = 'o'; break;
+				case 15: ch = 'p'; break;			
+				case 16: ch = 'q'; break;
+				case 17: ch = 'r'; break;			
+				case 18: ch = 's'; break;
+				case 19: ch = 't'; break;			
+				case 20: ch = 'u'; break;		
+				case 21: ch = 'v'; break;
+				case 22: ch = 'w'; break;				
+				case 23: ch = 'x'; break;
+				case 24: ch = 'y'; break;				
+				case 25: ch = 'z'; break;
+			}
+			output.set(ch,this.inventory[i] + LetInv.retrieve(i));
+		}
+		output.setLetters(this.letters + LetInv.size());
+		return output;
+	}
+	
+	// Method subtracts input LetterInventory from the calling LetterInventory
+	// Pre: LetterInventory Parameter != null.
+	// Post: None
+	public LetterInventory subtract(LetterInventory LetInv)
+	{
+		assert LetInv != null: "Precondition failed. Parameter was null.";
+		LetterInventory output = new LetterInventory();
+		char ch = 'a';
+		boolean flag = false;
+		for(int i = 0; i < ALPHABET; i++)
+		{
+			switch(i)
+			{
+				case 0: ch = 'a'; break;
+				case 1: ch = 'b'; break;
+				case 2: ch = 'c'; break;
+				case 3: ch = 'd'; break;		
+				case 4: ch = 'e'; break;
+				case 5: ch = 'f'; break;	
+				case 6: ch = 'g'; break;
+				case 7: ch = 'h'; break;		
+				case 8: ch = 'i'; break;
+				case 9: ch = 'j'; break;		
+				case 10: ch = 'k'; break;
+				case 11: ch = 'l'; break;		
+				case 12: ch = 'm'; break;
+				case 13: ch = 'n'; break;			
+				case 14: ch = 'o'; break;
+				case 15: ch = 'p'; break;			
+				case 16: ch = 'q'; break;
+				case 17: ch = 'r'; break;			
+				case 18: ch = 's'; break;
+				case 19: ch = 't'; break;			
+				case 20: ch = 'u'; break;		
+				case 21: ch = 'v'; break;
+				case 22: ch = 'w'; break;				
+				case 23: ch = 'x'; break;
+				case 24: ch = 'y'; break;				
+				case 25: ch = 'z'; break;
+			}
+			if(this.inventory[i] - LetInv.retrieve(i) < 0)
+				flag = true;
+			output.set(ch,this.inventory[i] - LetInv.retrieve(i));
+		}
+		output.setLetters(this.letters - LetInv.size());
+		if(flag)
+			return null;
+		else
+			return output;
+	}
+	
+	// Method that determines if 2 LetterInventories have the exact same quantities
+	// Pre: None
+	// Post: None
+	public boolean equals(Object O)
+	{
+		if(O instanceof LetterInventory)
+		{
+			LetterInventory LetInv = (LetterInventory) O;
+			boolean equiv = true;
+			char ch = 'a';
+			for(int i = 0; i < ALPHABET; i++)
+			{
+				switch(i)
+				{
+					case 0: ch = 'a'; break;
+					case 1: ch = 'b'; break;
+					case 2: ch = 'c'; break;
+					case 3: ch = 'd'; break;		
+					case 4: ch = 'e'; break;
+					case 5: ch = 'f'; break;	
+					case 6: ch = 'g'; break;
+					case 7: ch = 'h'; break;		
+					case 8: ch = 'i'; break;
+					case 9: ch = 'j'; break;		
+					case 10: ch = 'k'; break;
+					case 11: ch = 'l'; break;		
+					case 12: ch = 'm'; break;
+					case 13: ch = 'n'; break;			
+					case 14: ch = 'o'; break;
+					case 15: ch = 'p'; break;			
+					case 16: ch = 'q'; break;
+					case 17: ch = 'r'; break;			
+					case 18: ch = 's'; break;
+					case 19: ch = 't'; break;			
+					case 20: ch = 'u'; break;		
+					case 21: ch = 'v'; break;
+					case 22: ch = 'w'; break;				
+					case 23: ch = 'x'; break;
+					case 24: ch = 'y'; break;				
+					case 25: ch = 'z'; break;
+				}
+				
+				equiv = equiv && (this.get(ch) == LetInv.get(ch));
+			}
+			return equiv;
+		}
+		else
+			return false;
+	}
+}
